@@ -46,6 +46,7 @@ jobs:
               "categories": [
               {
                 "title": "## What's Changed",
+                "labels": ["backend","CI/CD","infra"]
               }
               ]
             }
