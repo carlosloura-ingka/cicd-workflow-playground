@@ -44,9 +44,9 @@ jobs:
               "sort": "ASC",
               "pr_template": "- #{{TITLE}} by @#{{AUTHOR}} in ##{{NUMBER}}",
               "categories": [
-              {
-                "title": "## What's Changed",
-              }
+                {
+                  "title": "## What's Changed",
+                }
               ]
             }
         env:
