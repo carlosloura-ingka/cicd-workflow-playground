@@ -6,3 +6,5 @@ Private playground repo for CICD workflows
 ** Test new trigger
 ** Test new trigger2
 ** Test new trigger3
+** Test new trigger4
+** Test new trigger5
