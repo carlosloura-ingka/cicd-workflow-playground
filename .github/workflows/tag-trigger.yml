@@ -3,7 +3,7 @@ name: Trigger Pipeline on Tag Creation
 on:
   push:
     tags:
-      - '@backend/v[0-9]+\.[0-9]+\.[0-9]+$'
+      - '@backend/v*.*.*'
   workflow_dispatch:
 
 
