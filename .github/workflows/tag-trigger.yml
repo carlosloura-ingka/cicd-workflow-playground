@@ -42,8 +42,8 @@ jobs:
               }
               ]
             }
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       # Create release
       - name: Create release
