@@ -23,10 +23,11 @@ jobs:
           TAG_NAME="${GITHUB_REF#refs/tags/}"
           echo "Current Tag Name: $TAG_NAME"
 
+      # Previous command to get name: name=$(git --no-pager tag --sort=creatordate --list '@backend/v[0-9]*.[0-9]*.[0-9]*' | tail -2 | head -1)
       - name: Get previous tag
         id: previousTag
         run: |
-            name=$(git --no-pager tag --sort=creatordate --list '@backend/v[0-9]*.[0-9]*.[0-9]*' | tail -2 | head -1)
+            name=$(gh release list --json tagName,isPrerelease,isLatest --jq ".[] | select(.isLatest == true) | .tagName")
             echo "previousTag=$name" >> $GITHUB_ENV
             echo "Previous Tag: $name"
 
