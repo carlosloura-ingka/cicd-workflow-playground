@@ -5,14 +5,12 @@ changelog:
     authors:
       - octocat
   categories:
-    - title: Breaking Changes 🛠
+    - title: Backend Changes 🎉
       labels:
-        - Semver-Major
-        - breaking-change
-    - title: Exciting New Features 🎉
+        - backend
+    - title: CI/CD Changes 🛠
       labels:
-        - Semver-Minor
-        - enhancement
-    - title: Something else
+        - CI/CD
+    - title: Other Changes
       labels:
         - "*"

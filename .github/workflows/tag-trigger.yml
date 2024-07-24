@@ -26,7 +26,7 @@ jobs:
       - name: Get previous tag
         id: previousTag
         run: |
-            name=$(git --no-pager tag --sort=creatordate --list '@backend/v*' | tail -2 | head -1)
+            name=$(git --no-pager tag --sort=creatordate --list '@backend/v[0-9]*.[0-9]*.[0-9]*' | tail -2 | head -1)
             echo "previousTag=$name" >> $GITHUB_ENV
             echo "Previous Tag: $name"
 
@@ -40,4 +40,5 @@ jobs:
             --title="${tag#v}" \
             --notes-start-tag="$previousTag" \
             --prerelease \
-            --generate-notes                   
+            --generate-notes
+      # Later we'll use `gh release edit "$tag" --prerelease=false --latest` to update this release
