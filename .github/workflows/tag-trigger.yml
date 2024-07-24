@@ -30,18 +30,16 @@ jobs:
             echo "previousTag=$name" >> $GITHUB_ENV
             echo "Previous Tag: $name"
 
-      - name: Release pushed tag
-        runs-on: ubuntu-22.04
-        steps:
-          - name: Create release
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              tag: ${{ github.ref_name }}
-            run: |
-              gh release create "$tag" \
-                  --repo="$GITHUB_REPOSITORY" \
-                  --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-                  --generate-notes
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+            gh release create "$tag" \
+            --repo="$GITHUB_REPOSITORY" \
+            --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+            --generate-noteseps:
+          
  
       # Generate change log based on the PRs merged between the previous release and the current one
       # - name: Generate changelog
