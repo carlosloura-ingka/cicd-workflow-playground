@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: "$GITHUB_REF#refs/tags/"
   
       - name: print-tag-name
         run: |
@@ -29,7 +30,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            name=$(gh release list --json tagName,isPrerelease,isLatest --jq ".[] | select(.isLatest == true) | .tagName")
+            name=$(gh release list --json tagName --jq ".[] | select(.tagName | startswith(\"@backend\")) | .tagName")
             echo "previousTag=$name" >> $GITHUB_ENV
             echo "Previous Tag: $name"
 
@@ -42,6 +43,5 @@ jobs:
             --repo="$GITHUB_REPOSITORY" \
             --title="${tag#v}" \
             --notes-start-tag="$previousTag" \
-            --prerelease \
             --generate-notes
-      # Later we'll use `gh release edit "$tag" --prerelease=false --latest` to update this release
+      # Later we'll use `gh release edit "$tag" --prerelease=false` to update this release
