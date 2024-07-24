@@ -37,7 +37,9 @@ jobs:
         run: |
             gh release create "$tag" \
             --repo="$GITHUB_REPOSITORY" \
-            --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+            --title="${tag#v}" \
+            --notes-start-tag="$previousTag" \
+            --prerelease \
             --generate-notes
           
  
