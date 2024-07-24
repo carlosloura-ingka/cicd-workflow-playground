@@ -26,6 +26,8 @@ jobs:
       # Previous command to get name: name=$(git --no-pager tag --sort=creatordate --list '@backend/v[0-9]*.[0-9]*.[0-9]*' | tail -2 | head -1)
       - name: Get previous tag
         id: previousTag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
             name=$(gh release list --json tagName,isPrerelease,isLatest --jq ".[] | select(.isLatest == true) | .tagName")
             echo "previousTag=$name" >> $GITHUB_ENV
