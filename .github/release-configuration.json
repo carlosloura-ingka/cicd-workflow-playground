@@ -1,0 +1,19 @@
+{
+  "template": "#{{CHANGELOG}}\nFull Changelog: #{{RELEASE_DIFF}}",
+  "pr_template": "- #{{TITLE}} by @#{{AUTHOR}} in ##{{NUMBER}}",
+  "empty_template": "- no changes",
+  "categories": [
+      {
+        "title": "## 🚀 Backend Changes",
+        "labels": ["backend"]
+      },
+      {
+        "title": "## 🛠️ CI/CD Changes",
+        "labels": ["fix"]
+      },
+      {
+        "title": "## ⛴️ Other Changes",
+        "labels": ["*"]
+      }
+    ]
+}

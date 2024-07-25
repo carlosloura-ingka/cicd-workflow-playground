@@ -23,7 +23,6 @@ jobs:
           TAG_NAME="${GITHUB_REF#refs/tags/}"
           echo "Current Tag Name: $TAG_NAME"
 
-      # Previous command to get name: name=$(git --no-pager tag --sort=creatordate --list '@backend/v[0-9]*.[0-9]*.[0-9]*' | tail -2 | head -1)
       - name: Get previous tag
         id: previousTag
         env:
@@ -33,14 +32,24 @@ jobs:
             echo "previousTag=$name" >> $GITHUB_ENV
             echo "Previous Tag: $name"
 
+      - name: Build Changelog
+        uses: mikepenz/release-changelog-builder-action@v4
+        with:
+          configuration: "./github/release-configuration.json"
+          fromTag: ${{ env.previousTag }}
+          toTag: ${{ github.ref_name }}
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
+          releaseNotes: ${{ steps.changelog.outputs.changelog }}
         run: |
             gh release create "$tag" \
             --repo="$GITHUB_REPOSITORY" \
             --title="${tag#v}" \
-            --notes-start-tag="$previousTag" \
-            --generate-notes
+            --nodes="${releaseNodes}"
       # Later we'll use `gh release edit "$tag" --prerelease=false` to update this release
