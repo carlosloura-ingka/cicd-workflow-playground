@@ -2,7 +2,7 @@ name: Trigger Pipeline on release
 
 on:
   release:
-    types: [prereleased]
+    types: [created]
 
 jobs:
   build:
