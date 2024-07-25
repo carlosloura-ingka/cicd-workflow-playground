@@ -1,0 +1,21 @@
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Release to make latest'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Update release to latest
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          name: ${{ inputs.release }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          makeLatest: true
+          allowUpdates: true
