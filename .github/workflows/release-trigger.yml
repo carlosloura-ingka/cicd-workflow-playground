@@ -13,13 +13,15 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout triggering workflow repository
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-  
-      - name: Print event
-        env:
-          EVENT_NAME: ${{ GITHUB_REF#refs/tags/ }}
-        run: echo "$EVENT_NAME"
+          ref: ${{ github.event.workflow_run.head_branch }}
+
+      - name: Get Tag Name
+        id: get_tag
+        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Output Tag Name
+        run: echo "The tag name is ${{ env.TAG_NAME }}"
 
