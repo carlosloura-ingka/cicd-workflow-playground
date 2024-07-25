@@ -18,8 +18,14 @@ jobs:
         with:
           fetch-depth: 0
   
-      - name: print-tag-name
+      - name: Print event
         env:
-          REF_NAME: ${{ github }}
+          EVENT: ${{ github.event }}
         run: |
-          echo "Current Ref: $REF_NAME"
+          echo "$EVENT"
+      
+      - name: Print event
+        env:
+          EVENT: ${{ github.event }}
+        run: |
+          echo "$EVENT"
