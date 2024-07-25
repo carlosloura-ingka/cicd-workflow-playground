@@ -1,7 +1,7 @@
 {
   "template": "#{{CHANGELOG}}\nFull Changelog: #{{RELEASE_DIFF}}",
   "pr_template": "- #{{TITLE}} by @#{{AUTHOR}} in ##{{NUMBER}}",
-  "empty_template": "- no changes",
+  "empty_template": "## No changes found 🔮",
   "categories": [
       {
         "title": "## Backend Changes 🚀",
@@ -10,10 +10,6 @@
       {
         "title": "## CI/CD Changes 🛠️",
         "labels": ["CI/CD"]
-      },
-      {
-        "title": "## Other Changes ⛴️",
-        "labels": ["*"]
       }
     ]
 }
