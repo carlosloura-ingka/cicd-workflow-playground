@@ -9,7 +9,7 @@
       },
       {
         "title": "## 🛠️ CI/CD Changes",
-        "labels": ["fix"]
+        "labels": ["CI/CD"]
       },
       {
         "title": "## ⛴️ Other Changes",
