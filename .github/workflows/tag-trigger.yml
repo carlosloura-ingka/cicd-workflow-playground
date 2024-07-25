@@ -52,5 +52,5 @@ jobs:
             gh release create "$tag" \
             --repo="$GITHUB_REPOSITORY" \
             --title="${tag#v}" \
-            --nodes="${releaseNodes}"
+            --notes="${releaseNodes}"
       # Later we'll use `gh release edit "$tag" --prerelease=false` to update this release
