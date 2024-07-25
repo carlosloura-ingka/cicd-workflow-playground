@@ -39,9 +39,14 @@ jobs:
           configuration: "./github/release-configuration.json"
           fromTag: ${{ env.previousTag }}
           toTag: ${{ github.ref_name }}
-
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: print-changelog
+        env:
+          CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+        run: |
+          echo "Current Tag Name: $CHANGELOG"
 
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
