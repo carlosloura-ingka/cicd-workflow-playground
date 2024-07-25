@@ -1,4 +1,4 @@
-name: Trigger Pipeline on Tag Creation
+name: StageDeployment
 
 on:
   push:

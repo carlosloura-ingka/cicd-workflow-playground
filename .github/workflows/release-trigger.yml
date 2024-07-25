@@ -1,8 +1,10 @@
 name: Trigger Pipeline on release
 
 on:
-  release:
-    types: [created]
+  workflow_run:
+    workflows: [StageDeployment]
+    types:
+      - completed
 
 jobs:
   build:
