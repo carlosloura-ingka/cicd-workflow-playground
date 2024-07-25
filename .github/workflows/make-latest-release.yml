@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
     inputs:
-      release:
+      ref:
         description: 'Release to make latest'
         required: true
 
