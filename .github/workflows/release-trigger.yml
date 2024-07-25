@@ -20,12 +20,7 @@ jobs:
   
       - name: Print event
         env:
-          EVENT: ${{ github.event }}
+          EVENT: ${{ github.ref_name }}
         run: |
           echo "$EVENT"
-      
-      - name: Print event
-        env:
-          EVENT: ${{ github.event }}
-        run: |
-          echo "$EVENT"
+
