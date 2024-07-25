@@ -27,8 +27,9 @@ jobs:
         id: previousTag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CURRENT_TAG: ${{ github.ref_name }}
         run: |
-            name=$(gh release list --json tagName,isDraft,isPrerelease --jq "[.[] | select(.isPrerelease == false) | select(.isDraft == false) | select(.tagName | startswith(\"@backend\")) | .tagName][0]")
+            name=$(gh release list --json tagName,isDraft --jq "[.[] | select(.isDraft == false) | select(.tagName | startswith(\"@backend\")) | select(.tagName != \"${CURRENT_TAG}\") | .tagName][0]")
             echo "previousTag=$name" >> $GITHUB_ENV
             echo "Previous Tag: $name"
 
