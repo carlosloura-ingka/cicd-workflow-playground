@@ -34,6 +34,7 @@ jobs:
             echo "Previous Tag: $name"
 
       - name: Build Changelog
+        id: changelog
         uses: mikepenz/release-changelog-builder-action@v4
         with:
           configuration: "./github/release-configuration.json"
@@ -46,7 +47,7 @@ jobs:
         env:
           CHANGELOG: ${{ steps.changelog.outputs.changelog }}
         run: |
-          echo "Current Tag Name: $CHANGELOG"
+          echo "Changelog: $CHANGELOG"
 
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
