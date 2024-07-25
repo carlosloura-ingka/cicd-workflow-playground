@@ -57,8 +57,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
 
-      - name: Output tag name
-        id: output_tag_name
-        env:
+      - name: Set output
+        env: 
           CURRENT_TAG: ${{ github.ref_name }}
-        run: echo "::set-output name=tag::${CURRENT_TAG}"
+        run: echo "tag_name=${CURRENT_TAG}" >> $GITHUB_OUTPUT
