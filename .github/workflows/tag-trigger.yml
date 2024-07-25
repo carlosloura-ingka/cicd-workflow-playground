@@ -37,7 +37,7 @@ jobs:
         id: changelog
         uses: mikepenz/release-changelog-builder-action@v4
         with:
-          configuration: "./github/release-configuration.json"
+          configuration: "./.github/release-configuration.json"
           fromTag: ${{ env.previousTag }}
           toTag: ${{ github.ref_name }}
         env:
