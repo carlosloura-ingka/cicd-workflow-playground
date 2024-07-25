@@ -4,15 +4,15 @@
   "empty_template": "- no changes",
   "categories": [
       {
-        "title": "## 🚀 Backend Changes",
+        "title": "## Backend Changes 🚀",
         "labels": ["backend"]
       },
       {
-        "title": "## 🛠️ CI/CD Changes",
+        "title": "## CI/CD Changes 🛠️",
         "labels": ["CI/CD"]
       },
       {
-        "title": "## ⛴️ Other Changes",
+        "title": "## Other Changes ⛴️",
         "labels": ["*"]
       }
     ]
