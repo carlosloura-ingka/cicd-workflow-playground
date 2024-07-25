@@ -15,7 +15,7 @@ jobs:
       - name: Update release to latest
         uses: ncipollo/release-action@v1.12.0
         with:
-          name: ${{ inputs.release }}
+          name: ${{ inputs.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
           makeLatest: true
           allowUpdates: true
