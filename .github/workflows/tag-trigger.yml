@@ -56,3 +56,9 @@ jobs:
           body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
+
+      - name: Output tag name
+        id: output_tag_name
+        env:
+          CURRENT_TAG: ${{ github.ref_name }}
+        run: echo "::set-output name=tag::${CURRENT_TAG}"
