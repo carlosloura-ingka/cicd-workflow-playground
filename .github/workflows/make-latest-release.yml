@@ -25,3 +25,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           makeLatest: true
           allowUpdates: true
+          omitBodyDuringUpdate: true
