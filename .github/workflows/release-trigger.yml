@@ -1,0 +1,46 @@
+name: Trigger Pipeline on Tag Creation
+
+on:
+  push:
+    tags:
+      - '@backend/v[0-9]*.[0-9]*.[0-9]*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+  
+      - name: print-tag-name
+        run: |
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          echo "Current Tag Name: $TAG_NAME"
+
+      # Previous command to get name: name=$(git --no-pager tag --sort=creatordate --list '@backend/v[0-9]*.[0-9]*.[0-9]*' | tail -2 | head -1)
+      - name: Get previous tag
+        id: previousTag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+            name=$(gh release list --limit 1 --json tagName --jq ".[] | select(.tagName | startswith(\"@backend\")) | .tagName")
+            echo "previousTag=$name" >> $GITHUB_ENV
+            echo "Previous Tag: $name"
+
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+            gh release create "$tag" \
+            --repo="$GITHUB_REPOSITORY" \
+            --title="${tag#v}" \
+            --notes-start-tag="$previousTag" \
+            --generate-notes
+      # Later we'll use `gh release edit "$tag" --prerelease=false` to update this release
