@@ -20,7 +20,7 @@ jobs:
   
       - name: Print event
         env:
-          EVENT_NAME: ${{ github.ref_name }}
+          EVENT_NAME: ${{ github.event.workflow_run.ref_name }}
         run: |
           echo "$EVENT_NAME"
 
