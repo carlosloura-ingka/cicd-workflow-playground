@@ -20,6 +20,6 @@ jobs:
   
       - name: print-tag-name
         env:
-          REF_NAME: ${{ github.ref_name }}
+          REF_NAME: ${{ github }}
         run: |
           echo "Current Ref: $REF_NAME"
