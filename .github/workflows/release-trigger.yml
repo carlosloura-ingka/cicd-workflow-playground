@@ -18,10 +18,6 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
 
-      - name: Get Tag Name
-        id: get_tag
-        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
       - name: Output Tag Name
-        run: echo "The tag name is ${{ github.event.workflow_run.conclusion.outputs.tag_name }}"
+        run: echo "The tag name is ${{ github.event.client_payload.tag_name }}"
 
