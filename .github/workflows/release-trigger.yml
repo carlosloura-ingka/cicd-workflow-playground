@@ -14,17 +14,11 @@ jobs:
       contents: write
 
     steps:
-      - name: Print head_branch
+      - name: Print release name
         env:
           HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
-          echo "branch: $HEAD_BRANCH"
-      
-      - name: Print head_commit
-        env:
-          HEAD_COMMIT: ${{ github.event.workflow_run.head_commit }}
-        run: |
-          echo "commit: $HEAD_COMMIT"
+          echo "Release name: $HEAD_BRANCH"
   
       - name: Checkout triggering workflow repository
         uses: actions/checkout@v2
