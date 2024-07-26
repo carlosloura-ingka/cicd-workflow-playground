@@ -14,23 +14,16 @@ jobs:
       contents: write
 
     steps:
-      - name: Print release name
+      - name: Fetch release name
         env:
           HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
-          echo "Release name: $HEAD_BRANCH"
+          echo "TAG_NAME=$HEAD_BRANCH" >> $GITHUB_ENV
+          echo "Release to deploy: $name"
   
       - name: Checkout triggering workflow repository
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
-
-      - name: Get release name
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-            name=$(gh release list --json tagName,isDraft,isPrerelease,createdAt --jq "sort_by(.createdAt) | reverse | [.[] | select(.isDraft == false) | select(.isPrerelease == true) | select(.tagName | startswith(\"@backend\")) | .tagName][0]")
-            echo "tag_name=$name" >> $GITHUB_ENV
-            echo "Tag to deploy: $name"
 
 
