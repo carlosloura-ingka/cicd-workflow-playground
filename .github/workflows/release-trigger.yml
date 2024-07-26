@@ -2,7 +2,7 @@ name: Trigger Pipeline on release
 
 on:
   workflow_run:
-    workflows: [StageDeployment]
+    workflows: ["Tag triggered stage deployment"]
     types:
       - completed
 
@@ -13,11 +13,16 @@ jobs:
       contents: write
 
     steps:
+      - name: Get release name
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+            name=$(gh release list --json tagName,isDraft,isPrerelease,createdAt --jq "sort_by(.createdAt) | reverse | [.[] | select(.isDraft == false) | select(.isPrerelease == true) | select(.tagName | startswith(\"@backend\")) | .tagName][0]")
+            echo "previousTag=$name" >> $GITHUB_ENV
+            echo "Previous Tag: $name"
+  
       - name: Checkout triggering workflow repository
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
-
-      - name: Output Tag Name
-        run: echo "The tag name is ${{ github.event.client_payload.tag_name }}"
 

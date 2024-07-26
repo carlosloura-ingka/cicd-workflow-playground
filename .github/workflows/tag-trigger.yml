@@ -1,10 +1,9 @@
-name: StageDeployment
+name: Tag triggered stage deployment
 
 on:
   push:
     tags:
       - '@backend/v[0-9]*.[0-9]*.[0-9]*'
-  workflow_dispatch:
 
 jobs:
   build:
@@ -24,7 +23,6 @@ jobs:
           echo "Current Tag Name: $TAG_NAME"
 
       - name: Get previous tag
-        id: previousTag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CURRENT_TAG: ${{ github.ref_name }}
@@ -56,8 +54,3 @@ jobs:
           body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
-
-      - name: Set output
-        env: 
-          CURRENT_TAG: ${{ github.ref_name }}
-        run: echo "tag_name=${CURRENT_TAG}" >> $GITHUB_OUTPUT
