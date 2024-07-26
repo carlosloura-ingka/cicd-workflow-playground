@@ -19,7 +19,12 @@ jobs:
           HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
           echo "TAG_NAME=$HEAD_BRANCH" >> $GITHUB_ENV
-          echo "Release to deploy: $name"
+
+      - name: Print tag name
+        env:
+          TAG_NAME: ${{ env.TAG_NAME }}
+        run: |
+          echo "Tag to deploy: $TAG_NAME"
   
       - name: Checkout triggering workflow repository
         uses: actions/checkout@v2
