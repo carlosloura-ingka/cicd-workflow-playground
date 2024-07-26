@@ -1,4 +1,4 @@
-name: Tag triggered stage deployment
+name: Backend stage tag triggered deployment
 
 on:
   push:

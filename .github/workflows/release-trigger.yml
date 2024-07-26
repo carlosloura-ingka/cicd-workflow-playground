@@ -2,7 +2,7 @@ name: Trigger Pipeline on release
 
 on:
   workflow_run:
-    workflows: ["Tag triggered stage deployment"]
+    workflows: ["Backend stage tag triggered deployment"]
     types:
       - completed
 
