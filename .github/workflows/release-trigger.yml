@@ -19,16 +19,21 @@ jobs:
           HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
           echo "TAG_NAME=$HEAD_BRANCH" >> $GITHUB_ENV
-
-      - name: Print tag name
-        env:
-          TAG_NAME: ${{ env.TAG_NAME }}
-        run: |
-          echo "Tag to deploy: $TAG_NAME"
+          echo "Tag to deploy: $HEAD_BRANCH"
   
       - name: Checkout triggering workflow repository
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
+
+      - name: Update release to latest
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          name: ${{ env.TAG_NAME }}
+          tag: ${{ env.TAG_NAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          makeLatest: true
+          allowUpdates: true
+          omitBodyDuringUpdate: true
 
 
