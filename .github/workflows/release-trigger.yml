@@ -18,11 +18,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
             name=$(gh release list --json tagName,isDraft,isPrerelease,createdAt --jq "sort_by(.createdAt) | reverse | [.[] | select(.isDraft == false) | select(.isPrerelease == true) | select(.tagName | startswith(\"@backend\")) | .tagName][0]")
-            echo "previousTag=$name" >> $GITHUB_ENV
-            echo "Previous Tag: $name"
+            echo "tag_name=$name" >> $GITHUB_ENV
+            echo "Tag to deploy: $name"
   
       - name: Checkout triggering workflow repository
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
+          ref: ${{ env.tag_name }}
 
