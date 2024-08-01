@@ -8,7 +8,7 @@ on:
 jobs:
   wait-for-approvals:
     runs-on: ubuntu-latest
-    if: ${{ 'false' == 'success' }}
+    if: ${{ 'success' == 'success' }}
     environment: local
 
     steps:
