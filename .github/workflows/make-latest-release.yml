@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: local
 
+    steps:
+      - name: Approval granted
+        run: |
+          echo "Received approva, continuing."
+    
+
   build:
     runs-on: ubuntu-latest
     permissions:
