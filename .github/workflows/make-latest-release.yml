@@ -12,9 +12,7 @@ jobs:
 
     steps:
       - name: Approval granted
-        run: |
-          echo "Received approva, continuing."
-    
+        run: echo "Received necessary approval, continuing."
 
   execute:
     runs-on: ubuntu-latest
