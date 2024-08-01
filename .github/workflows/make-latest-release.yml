@@ -6,6 +6,10 @@ on:
         required: true
 
 jobs:
+  wait-for-approvals:
+    runs-on: ubuntu-latest
+    environment: local
+
   build:
     runs-on: ubuntu-latest
     permissions:
