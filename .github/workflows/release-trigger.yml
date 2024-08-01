@@ -7,9 +7,23 @@ on:
       - completed
 
 jobs:
+  check-workflow-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check triggering workflow status
+        id: check-condition
+        run: |
+          if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
+            echo "Triggering workflow finished with status '${{ github.event.workflow_run.conclusion }}'. Aborting current workflow."
+            exit 1
+          else
+            echo "Triggering workflow finished with status '${{ github.event.workflow_run.conclusion }}'. Continuing current workflow."
+          fi
+
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: check-workflow-status
     permissions:
       contents: write
 
