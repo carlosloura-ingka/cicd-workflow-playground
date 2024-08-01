@@ -16,8 +16,9 @@ jobs:
           echo "Received approva, continuing."
     
 
-  build:
+  execute:
     runs-on: ubuntu-latest
+    needs: wait-for-approvals
     permissions:
       contents: write
 
