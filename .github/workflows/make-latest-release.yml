@@ -40,6 +40,7 @@ jobs:
   send-slack-message:
     uses: ./.github/workflows/send-slack-notification.yml
     needs: execute
+    secrets: inherit
     with:
       environment: local
       slack_channel: energy-digital-backend-releases
