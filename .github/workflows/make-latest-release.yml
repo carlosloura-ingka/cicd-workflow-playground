@@ -43,6 +43,7 @@ jobs:
           channel-id: energy-digital-backend-releases
           payload: |
             {
+              "text": "[DEV] Release ${{ github.ref_name }} has been deployed",
               "blocks": [
                 {
                   "type": "section",
