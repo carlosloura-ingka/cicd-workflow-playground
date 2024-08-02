@@ -59,7 +59,7 @@ jobs:
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.ref }}|${{ inputs.ref }}>"
+                "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.ref }}|Github release page>"
               }
             }
           ]
