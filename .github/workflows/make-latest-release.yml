@@ -36,3 +36,30 @@ jobs:
           makeLatest: true
           allowUpdates: true
           omitBodyDuringUpdate: true
+
+      - name: Send slack notification
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          channel-id: energy-digital-backend-releases
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*[DEV] Release ${{ github.ref_name }} has been deployed 🚀*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}|${{ github.ref_name }}>"
+                  }
+                }
+              ]
+            }
+        env:
+            SLACK_BOT_TOKEN: xoxb-728460929616-7192207659508-7myp5X9WXW7ZK0fO0mM6hLcC
+            RELEASE_NAME: ${{ inputs.ref }}
