@@ -61,5 +61,5 @@ jobs:
               ]
             }
         env:
-            SLACK_BOT_TOKEN: xoxb-728460929616-7192207659508-7myp5X9WXW7ZK0fO0mM6hLcC
-            RELEASE_NAME: ${{ inputs.ref }}
+          SLACK_BOT_TOKEN: "xoxb-728460929616-7192207659508-7myp5X9WXW7ZK0fO0mM6hLcC"
+          RELEASE_NAME: ${{ inputs.ref }}
