@@ -43,20 +43,20 @@ jobs:
           channel-id: energy-digital-backend-releases
           payload: |
             {
-              "text": "[DEV] Release ${{ github.ref_name }} has been deployed",
+              "text": "[DEV] Release ${{ RELEASE_NAME }} has been deployed",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*[DEV] Release ${{ github.ref_name }} has been deployed 🚀*"
+                    "text": "*[DEV] Release ${{ RELEASE_NAME }} has been deployed 🚀*"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}|${{ github.ref_name }}>"
+                    "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ RELEASE_NAME }}|${{ RELEASE_NAME }}>"
                   }
                 }
               ]
