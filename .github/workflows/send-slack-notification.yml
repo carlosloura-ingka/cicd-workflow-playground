@@ -24,19 +24,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Import Secrets
-        id: secrets
-        uses: hashicorp/vault-action@v2.4.3
-        with:
-          url: https://vault-prod.build.ingka.ikea.com
-          namespace: energy-services
-          method: jwt
-          path: github-actions-jwt
-          role: workflow-${{inputs.environment}}
-          exportEnv: false
-          secrets: |
-            secret/data/machine/${{ inputs.environment }}/github SLACK_BOT_TOKEN ;
     
       - name: Send slack notification
         uses: slackapi/slack-github-action@v1.26.0
@@ -44,5 +31,5 @@ jobs:
           channel-id: ${{ inputs.slack_channel }}
           payload: ${{ inputs.payload }}
         env:
-            SLACK_BOT_TOKEN: ${{ steps.secrets.outputs.SLACK_BOT_TOKEN }}
+            SLACK_BOT_TOKEN: "xoxb-728460929616-7192207659508-7myp5X9WXW7ZK0fO0mM6hLcC"
             RELEASE_NAME: ${{ inputs.tag_name }}

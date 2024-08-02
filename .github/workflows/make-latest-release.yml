@@ -9,7 +9,7 @@ jobs:
   wait-for-approvals:
     runs-on: ubuntu-latest
     if: ${{ 'success' == 'success' }}
-    environment: local
+    # environment: local
 
     steps:
       - name: Approval granted
@@ -37,30 +37,29 @@ jobs:
           allowUpdates: true
           omitBodyDuringUpdate: true
 
-      - name: Send slack notification
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          channel-id: energy-digital-backend-releases
-          payload: |
+  send-slack-message:
+    uses: ./.github/workflows/send-slack-notification.yml
+    needs: execute
+    with:
+      environment: local
+      slack_channel: energy-digital-backend-releases
+      payload: |
+        {
+          "text": "[LOCAL] Release ${{ inputs.ref }} has been deployed",
+          "blocks": [
             {
-              "text": "[DEV] Release ${{ env.RELEASE_NAME }} has been deployed",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*[DEV] Release ${{ env.RELEASE_NAME }} has been deployed 🚀*"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ env.RELEASE_NAME }}|${{ env.RELEASE_NAME }}>"
-                  }
-                }
-              ]
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "*[LOCAL] Release ${{ inputs.ref }} has been deployed 🚀*"
+              }
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.ref }}|${{ inputs.ref }}>"
+              }
             }
-        env:
-          SLACK_BOT_TOKEN: "xoxb-728460929616-7192207659508-7myp5X9WXW7ZK0fO0mM6hLcC"
-          RELEASE_NAME: ${{ inputs.ref }}
+          ]
+        }
