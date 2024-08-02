@@ -52,7 +52,7 @@ jobs:
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "*[LOCAL] Release **${{ inputs.ref }}** has been deployed 🚀*"
+                "text": "*[LOCAL] Release `${{ inputs.ref }}` has been deployed 🚀*"
               }
             },
             {
