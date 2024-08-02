@@ -31,5 +31,5 @@ jobs:
           channel-id: ${{ inputs.slack_channel }}
           payload: ${{ inputs.payload }}
         env:
-            SLACK_BOT_TOKEN: "xoxb-728460929616-7192207659508-7myp5X9WXW7ZK0fO0mM6hLcC"
+            SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
             RELEASE_NAME: ${{ inputs.tag_name }}
