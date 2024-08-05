@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    needs: check-workflow-status
     permissions:
       contents: write
 
