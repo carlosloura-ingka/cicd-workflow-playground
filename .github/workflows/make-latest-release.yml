@@ -25,13 +25,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          ref: ${{ inputs.ref }}
+          ref: ${{ github.ref_name }}
     
       - name: Update release to latest
         uses: ncipollo/release-action@v1.12.0
         with:
-          name: ${{ inputs.ref }}
-          tag: ${{ inputs.ref }}
+          name: ${{ github.ref }}
+          tag: ${{ github.ref_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           makeLatest: true
           allowUpdates: true
@@ -46,20 +46,20 @@ jobs:
       slack_channel: energy-digital-backend-releases
       payload: |
         {
-          "text": "[LOCAL] Release ${{ inputs.ref }} has been deployed",
+          "text": "[LOCAL] Release ${{ github.ref_name }} has been deployed",
           "blocks": [
             {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "*[LOCAL] Release `${{ inputs.ref }}` has been deployed 🚀*"
+                "text": "*[LOCAL] Release `${{ github.ref_name }}` has been deployed 🚀*"
               }
             },
             {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.ref }}|Github release page>"
+                "text": "• Workflow execution: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Github workflow run>\n• See what changed: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}|Github release page>"
               }
             }
           ]
