@@ -3,7 +3,7 @@ on:
     inputs:
       ref:
         description: 'Release to make latest'
-        required: true
+        required: false
 
 jobs:
   wait-for-approvals:
@@ -25,8 +25,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
           ref: ${{ inputs.ref }}
+    
       - name: Update release to latest
         uses: ncipollo/release-action@v1.12.0
         with:
