@@ -31,7 +31,7 @@ jobs:
 
   execute:
     runs-on: ubuntu-latest
-    if: ${{ always() && 'true' == 'true' }}
+    if: ${{ always() && 'true' == 'false' }}
     needs: [wait-for-approvals,wait-for-approvals-2]
     permissions:
       contents: write
