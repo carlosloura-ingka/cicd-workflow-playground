@@ -31,7 +31,7 @@ jobs:
           ref: ${{ github.ref_name }}
 
       - name: Print output
-        run: echo "Output ${steps.step-1.set-prod-deploy}"
+        run: echo "Output ${steps.step-1.outputs.set-prod-deploy}"
     
       - name: Update release to latest
         uses: ncipollo/release-action@v1.12.0
