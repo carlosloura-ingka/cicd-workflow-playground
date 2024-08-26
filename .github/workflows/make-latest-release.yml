@@ -15,7 +15,8 @@ jobs:
 
     steps:
       - name: Approval granted
-        run: echo "Received necessary approval, continuing."
+        id: step-1
+        run: echo "set-prod-deploy=test 123" >> $GITHUB_OUTPUT
 
   execute:
     runs-on: ubuntu-latest
@@ -28,6 +29,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.ref_name }}
+
+      - name: Print output
+        run: echo "Output ${steps.step-1.set-prod-deploy}"
     
       - name: Update release to latest
         uses: ncipollo/release-action@v1.12.0
