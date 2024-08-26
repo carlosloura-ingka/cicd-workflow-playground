@@ -23,6 +23,9 @@ jobs:
     needs: wait-for-approvals
     permissions:
       contents: write
+    env: 
+      set_prod_deploy: ${{ env.set_prod_deploy }}
+
 
     steps:
       - name: Checkout Code
