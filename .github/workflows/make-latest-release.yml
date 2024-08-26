@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Approval granted
         id: step1
-        run: echo "set_prod_deploy=test 123" >> $GITHUB_OUTPUT
+        run: echo "set_prod_deploy=test 123" >> $GITHUB_ENV
 
   execute:
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
           ref: ${{ github.ref_name }}
 
       - name: Print output
-        run: echo "Output ${steps.step1.outputs.set_prod_deploy}"
+        run: echo "Output ${env.set_prod_deploy}"
     
       - name: Update release to latest
         uses: ncipollo/release-action@v1.12.0
