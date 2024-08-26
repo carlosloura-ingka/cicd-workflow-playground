@@ -31,6 +31,7 @@ jobs:
 
   execute:
     runs-on: ubuntu-latest
+    if: ${{ always() }}
     needs: [wait-for-approvals,wait-for-approvals-2]
     permissions:
       contents: write
