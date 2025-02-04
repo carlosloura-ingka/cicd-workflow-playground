@@ -13,8 +13,8 @@ jobs:
         shell: bash
         run: | 
           condition=false
-          com=$([ "$condition" = true ] && echo "Alice" || echo "apt")
-          sudo ${{ com }} update && sudo apt install -y lcov
+          command=$([ "$condition" = true ] && echo "Alice" || echo "apt")
+          sudo ${{ command }} update && sudo apt install -y lcov
       - name: Install lcov
         shell: bash
         run: lcov -h
