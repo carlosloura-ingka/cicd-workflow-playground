@@ -11,7 +11,10 @@ jobs:
     steps:
       - name: Install lcov
         shell: bash
-        run: sudo apt update && sudo apt install -y lcov
+        run: | 
+          condition=false
+          name=$([ "$condition" = true ] && echo "Alice" || echo "apt")
+          sudo ${{ name }} update && sudo apt install -y lcov
       - name: Install lcov
         shell: bash
         run: lcov -h
