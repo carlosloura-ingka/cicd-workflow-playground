@@ -12,3 +12,6 @@ jobs:
       - name: Install lcov
         shell: bash
         run: sudo apt update && sudo apt install -y lcov
+      - name: Install lcov
+        shell: bash
+        run: lcov -h
